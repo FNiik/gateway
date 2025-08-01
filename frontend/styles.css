@@ -1,0 +1,123 @@
+table, th, td {
+	border: 1px solid black; 
+	padding: 8px;        
+    border-collapse: collapse;
+    border-color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 100%;
+
+
+}
+th, td{
+    width: 33.33%;
+}
+h1{
+    text-align: center;
+}
+tr:nth-child(odd){
+    background-color: #ddd;
+}
+table a:link{color: #2c3e50; text-decoration-line: none;}
+table a:hover{color: #4F68C3; text-decoration-line: underline; text-decoration-color:#4F68C3;}
+table a:active{color:#374151}
+/* table a:visited{color: #2c3e50; text-decoration-line: none;} */
+
+
+.pagination {
+    display: flex;
+    justify-content:center;
+    align-items:flex-end;
+  }
+  
+  .pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+  }
+  
+  .pagination a.active {
+    background-color:#79B8F3;
+    color: white;
+    border: 1px solid #79B8F3;
+  }
+  
+  .pagination a:hover:not(.active) {background-color: #ddd;}
+.sidebarAndContent{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+}
+.sidebar{
+  width: 80px;
+  background-color: #79B8F3;
+  color: white;
+  height: 100vh;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  
+
+}
+.sidebar:hover{
+  width: 200px;
+}
+.sidebar ul{
+  list-style-type: none;
+  padding: 0%;
+  margin: 0%;
+  display: flex;
+  flex-direction: column;
+  color: white;
+ 
+}
+.sidebar li{
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: white;
+  border: #f1f1f1 solid 1px;
+}
+.sidebar li:hover{
+  background-color:#B0C4DE;
+  color: white;
+
+}
+.sidebar a{
+  color: white;
+}
+.content{
+  flex: 1;
+  padding: 20px;
+  background-color: #f1f1f1;
+  ;
+
+}
+.dashboard{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+
+
+}
+.card{
+  background-color:#79B8F3;
+  color: aliceblue;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  flex: 1 1 200px;
+}
+.card:hover{
+  background-color:#B0C4DE;
+  transform: scale(1.02);
+  
+}
