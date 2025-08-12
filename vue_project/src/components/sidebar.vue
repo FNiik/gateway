@@ -31,11 +31,12 @@
 <style scoped>
 .sidebar {
     width: 230px;
-    height: 1;
+    height: 100vh;
     background-color:#FAFAFA;
     padding: 20px;
     display: flex;
     flex-direction: column;
+    /* position: fixed; */
     
     border-right: 1px solid #ddd;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

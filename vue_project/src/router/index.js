@@ -6,7 +6,7 @@ import gatewaydetail from '@/pages/gatewaydetail.vue'
 
 const routes = [
     {path:'/', name:'gatewaylist', component:gatewaylist},
-    // {path:'gateway/:id', name:'gatewaydetail', component:gatewaydetail}
+    {path:'/gateway/:id', name:'gatewaydetail', component:gatewaydetail}
     
 
 ]

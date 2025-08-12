@@ -22,13 +22,13 @@ const filteredgateways = computed(() => {
   <el-table ref="tableRef" row-key="name" :data="filteredgateways" style="width: 100%">
     <el-table-column prop="name" label="Gateway Name" width="180" >
         <template #default="scope">
-            <!-- <router-link
+            <router-link
                 class="namelink"
                 :to="{ name: 'gatewaydetail', params: { id: scope.row.id } }"
             >
                 {{ scope.row.name }}
-            </router-link> -->
-            <a href="#" class="namelink">{{ scope.row.name }}</a>
+            </router-link>
+            
       
         
           
