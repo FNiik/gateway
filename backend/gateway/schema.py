@@ -59,15 +59,20 @@ class CreateGateway(graphene.Mutation):
         port_number= graphene.Int(required=True)
         description= graphene.String(required=False)
         io= graphene.String(required=False)
+        status= graphene.String(required=False)
+        location = graphene.String(required=False)
     gateway= graphene.Field(GatewayType)  
     ok = graphene.Boolean()  
-    def mutate(self, info, name, ip_address, port_number, description=None, io=None):
+    def mutate(self, info, name, ip_address, port_number, description=None, io=None , status=None, location=None):
         gateway= Gateway(
             name=name,
             ip_address=ip_address,
             port_number=port_number,
             description=description,
-            io=io
+            io=io,
+            status=status,
+            location=location
+
         )
         gateway.save()
         ok= True
@@ -82,10 +87,12 @@ class UpdateGateway(graphene.Mutation):
         port_number= graphene.Int(required=False)
         description= graphene.String(required=False)
         io= graphene.String(required=False)
+        status= graphene.String(required=False)
+        location = graphene.String(required=False)
     gateway= graphene.Field(GatewayType)  
     ok = graphene.Boolean()
     message= graphene.String() 
-    def mutate(self, info, id, name=None, ip_address=None, port_number=None, description=None, io=None):
+    def mutate(self, info, id, name=None, ip_address=None, port_number=None, description=None, io=None, status=None, location=None):
         try:
             gateway= Gateway.objects.get(pk=id)
             if name is not None:
@@ -99,6 +106,10 @@ class UpdateGateway(graphene.Mutation):
                 gateway.description=description
             if io is not None:
                 gateway.io=io
+            if status is not None:
+                gateway.status=status
+            if location is not None:
+                gateway.location=location        
 
             gateway.save()
             ok=True

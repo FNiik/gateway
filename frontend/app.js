@@ -7,6 +7,8 @@ function loadGateways(page, pagesize){
       ipAddress
       portNumber
       description
+      status
+      location
     }
     totalCount
     page
@@ -45,6 +47,7 @@ fetch('http://127.0.0.1:8000/gateway/graphql/',{
             row.appendChild(nameCell);
             let ipCell = document.createElement('td');
             ipCell.textContent = gt.ipAddress;
+            
             row.appendChild(ipCell);
             // tableBody.appendChild(row);
             let portCell = document.createElement('td');
