@@ -6,6 +6,7 @@ import { Switch } from '@element-plus/icons-vue'
 import { Edit } from '@element-plus/icons-vue'
 import overview from '@/components/overview.vue';
 import Overview from '@/components/overview.vue';
+import edit from '@/components/edit.vue';
 const route=useRoute()
 // let id=ref(route.params.id)
 // fetch data
@@ -85,6 +86,7 @@ watch(()=>route.params.id,
                                 <span>Edit</span>
                                 </span>
                             </template>
+                            <edit :gatewayinfo="gatewayinformation" />
                             <!-- component call -->
       
                         </el-tab-pane>

@@ -39,9 +39,14 @@ let gatewayinformation= defineProps({
         </div>
         <div class="twocard">
             <div class="card">
-            <h3>Status</h3>
-            {{ gatewayinfo.status }}
-        </div>
+                <h3>Status</h3>
+                {{ gatewayinfo.status }}
+            </div>
+            <di class="card">
+                <h3>location</h3>
+                {{ gatewayinfo.location }}
+            </di>
+
 
         </div>
         
@@ -66,7 +71,7 @@ let gatewayinformation= defineProps({
 }
 .card{
     flex-basis: 50%;
-    border:1px solid #F2F3F7;
+    border:1px solid #F3F4F7;
     border-radius: 8px;
     padding: 20px;
     margin: 15px;
@@ -85,5 +90,10 @@ let gatewayinformation= defineProps({
 .headerAndContainer{
     display: flex;
     flex-direction: column;
+    border:1px solid #E5E5E7;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px;
+    
 }
 </style>
