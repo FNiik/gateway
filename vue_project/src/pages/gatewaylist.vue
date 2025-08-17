@@ -87,6 +87,7 @@ onMounted(() => {
         <div class="tablesearch">
             <h1>Gateway Management</h1>
             <span>Configure and monitor your network gateways</span>
+            <button class=""> Add Gateway</button>
             <div class="searchfilter">
                 <el-input
                     v-model="input1"

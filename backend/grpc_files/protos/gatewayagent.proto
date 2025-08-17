@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package keyhan.gateway_agent_messages;
+
+service GatewayAgent
+{
+    rpc NetAdapterInfo (NullRequest) returns (NetAdapterInfoResponse) {}
+
+    rpc SetDateTime (SetDateTimeRequest) returns (NullResponse) {}
+    rpc GetDateTime (NullRequest) returns (GetDateTimeResponse) {}
+
+    rpc AddRoute (RouteInfo) returns (NullResponse) {}
+    rpc RemoveRoute (RouteInfo) returns (NullResponse) {}
+    rpc ShowRoute (NullRequest) returns (ShowRoutesResponse) {}
+
+    rpc Arp (NullRequest) returns (ExecutionResponse) {}
+    rpc Ping (PingRequest) returns (ExecutionResponse) {}
+    rpc TraceRoute (TraceRouteRequest) returns (ExecutionResponse) {}
+    rpc TcpPortTest (TcpPortTestRequest) returns (ExecutionResponse) {}
+}
+
+
+message NullRequest {}
+message NullResponse {}
+
+message NetworkAddress
+{
+    uint32 ip = 1;
+    uint32 mask = 2;
+}
+
+enum IpSetMode
+{
+    DHCP = 0;
+    MANUAL = 1;
+}
+
+message NetAdapterInfo
+{
+    uint32 index = 1;
+    string name = 2;
+    string description = 3;
+    repeated NetworkAddress addresses = 4;
+    string gateway = 5;
+    IpSetMode ip_set_mode = 6;
+    bool activity = 7;
+    bool enability = 8;
+}
+
+message NetAdapterInfoResponse
+{
+    string all_net_adapters_info = 1;
+    repeated NetAdapterInfo net_adapter_info = 2;
+}
+
+
+message SetDateTimeRequest
+{
+    string new_date = 1;
+    string new_time = 2;
+}
+
+message GetDateTimeResponse
+{
+    string current_date = 1;
+    string current_time = 2;
+}
+
+
+message GeneralEthernetCardInfo
+{
+    uint32 index = 1;
+    string ip = 2;
+    string mask = 3;
+    string gateway = 4;
+}
+
+message RouteInfo
+{
+    GeneralEthernetCardInfo destination_interface = 1;
+    string gateway_ip = 2;
+    uint32 metric = 3;
+    string interface_name = 4;
+    uint32 interface_index = 5;
+}
+
+message ShowRoutesResponse
+{
+    string all_route_info = 1;
+    repeated RouteInfo route_info = 2;
+}
+
+
+message PingRequest
+{
+    string ip = 1;
+}
+
+message TraceRouteRequest
+{
+    string ip = 1;
+}
+
+message TcpPortTestRequest
+{
+    string ip = 1;
+    uint32 port = 2;
+}
+
+message ExecutionResponse
+{
+    string response = 1;
+}
