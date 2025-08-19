@@ -1,14 +1,18 @@
 <!-- gatewaylist.vue -->
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, toDisplayString } from 'vue';
 import { ref } from 'vue';
 // import table from '@/components/tablecomponent.vue';
 // import Table from '@/components/tablecomponent.vue';
 import tablecomponent from '@/components/tablecomponent.vue';
 import { Search } from '@element-plus/icons-vue'
+import { RouterLink } from 'vue-router';
+import Create from '@/components/create.vue';
 const input1=ref('')
+// const showDialog = ref(false)
 
 const value = ref('')
+// const dialogFormVisible = ref(false)
 
 const options = [
   {
@@ -70,7 +74,7 @@ fetch('http://127.0.0.1:8000/gateway/graphql/',{
 });
 }
 onMounted(() => {
-  loadGateways(1, 20)
+  loadGateways(1, 30)
 })
 // let filteredgateways=ref([])
 
@@ -87,7 +91,10 @@ onMounted(() => {
         <div class="tablesearch">
             <h1>Gateway Management</h1>
             <span>Configure and monitor your network gateways</span>
-            <button class=""> Add Gateway</button>
+            <create />
+           
+            
+            <!-- <button class="buttoms"> Add Gateway</button> -->
             <div class="searchfilter">
                 <el-input
                     v-model="input1"
@@ -135,7 +142,7 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding: 20px;
+    /* padding: 20px; */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
 }
@@ -143,6 +150,9 @@ onMounted(() => {
     background-color: #FFFFFF;
     padding:20px;
     border-bottom:  1px solid #F2F3F7;
+    flex-grow: 1;
+    flex-basis: 100%;
+    width: 100%;
 }
 .tablesearch{
     background-color:#F9FAFC ;

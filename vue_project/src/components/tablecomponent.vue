@@ -1,11 +1,12 @@
 <script setup>
-import { computed, ref } from 'vue'
-
+import { computed, ref } from 'vue';
+import { More } from '@element-plus/icons-vue';
+import deleteGt from './deleteGt.vue';
 const { gateways, value } = defineProps({
   gateways: Array,
   value: String
 })
-
+const deleteRefs={}
 const tableRef = ref()
 
 const formatter = (row, column) => {
@@ -53,6 +54,37 @@ const filteredgateways = computed(() => {
       </template>
     </el-table-column>
     <el-table-column prop="location" label="Location" :formatter="formatter" />
+    <el-table-column label="Actions">
+      <template #default="scope">
+        <el-dropdown>
+      <el-button >
+        <el-icon><More /></el-icon>
+      </el-button>
+      
+      <template #dropdown>
+        <el-dropdown-menu>
+          <el-dropdown-item  > 
+            <template #default={row}>
+            <router-link class="dropdownItems" :to="{ name: 'gatewaydetail', params: { id: scope.row.id } }" >
+              View Details
+            </router-link>
+            </template>
+          </el-dropdown-item>
+          <el-dropdown-item @click="()=>deleteRefs[scope.row.id].open()"> 
+            <template #default={row}>
+              <delete-gt :id="Number(scope.row.id)" :ref="el => deleteRefs[scope.row.id]=el"/>
+              
+            <!-- call delete component -->
+             <span class="dropdownItems">Delete</span>
+            </template>
+          
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </template>
+    </el-dropdown>
+      </template>
+
+    </el-table-column>
   </el-table>
 </template>
 <style scoped>
@@ -74,6 +106,15 @@ const filteredgateways = computed(() => {
     text-decoration: none;
 }
     
-
-
+.dropdownItems{
+  color: black;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-decoration: none;
+  
+}
+.dropdownItems span{
+  color: red;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-decoration: none;
+}
 </style>
