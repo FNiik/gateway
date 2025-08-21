@@ -7,6 +7,7 @@ import { Edit } from '@element-plus/icons-vue'
 import overview from '@/components/overview.vue';
 import Overview from '@/components/overview.vue';
 import edit from '@/components/edit.vue';
+import commandPage from '@/components/commandPage.vue';
 const route=useRoute()
 // let id=ref(route.params.id)
 // fetch data
@@ -121,6 +122,7 @@ watch(()=>route.params.id,
                                 </span>
                             </template>
                             <!-- component call -->
+                             <commandPage/>
       
                         </el-tab-pane>
 
@@ -145,7 +147,15 @@ watch(()=>route.params.id,
 
 .demo-tabs > .el-tabs__content {
   padding: 32px;
-  color: #6b778c;
+  color: #6B7484;
+  font-size: 32px;
+  font-weight: 600;
+  
+ 
+}
+.demo-tabs > .el-tabs__content :active {
+  padding: 32px;
+  color: black;
   font-size: 32px;
   font-weight: 600;
  
@@ -162,7 +172,7 @@ watch(()=>route.params.id,
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding: 20px;
+    /* padding: 20px; */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
 }
@@ -226,6 +236,35 @@ watch(()=>route.params.id,
   flex: 1 1 0;
   text-align: center;
 }
+/* .scrollbar{
+    background-color: #FFFFFF;
+    margin-bottom: 0px;
+    border-bottom:1px solid #F2F3F7 ;
+    padding: 15px;
+    
+    border-radius: 8px;
+} */
+/* رنگ تب فعال */
+::v-deep(.el-tabs__item.is-active) {
+  color: #333;
+  background: #f1f1f1;
+  border-radius: 6px;
+}
 
+/* تب‌ها */
+::v-deep(.el-tabs__header) {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* محتوای تب‌ها */
+::v-deep(.el-tabs__content) {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+}
 
 </style>
