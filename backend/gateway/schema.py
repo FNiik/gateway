@@ -22,8 +22,8 @@ class NetworkAddressType(graphene.ObjectType):
     ip=graphene.String()
     mask=graphene.String()
 class IpSetModeType(graphene.Enum):
-    dhcp="dhcp"
-    manual="manual"
+    DHCP = 0
+    MANUAL = 1
     
 class NetAdapterInfoType(graphene.ObjectType):
     index=graphene.Int()
@@ -31,7 +31,7 @@ class NetAdapterInfoType(graphene.ObjectType):
     description=graphene.String()
     address=graphene.List(NetworkAddressType)
     gateway=graphene.String()
-    ip_set_mode=graphene.Field(IpSetModeType)
+    ip_set_mode=IpSetModeType()
     activity=graphene.Boolean()
     enability=graphene.Boolean()
 class NetAdapterInfoResponseType(graphene.ObjectType):
@@ -114,7 +114,7 @@ class Query(graphene.ObjectType):
                         description=adapter.description,
                         address=address_list,
                         gateway=adapter.gateway,
-                        ip_set_mode=IpSetModeType(adapter.ip_set_mode),
+                        ip_set_mode=adapter.ip_set_mode,
                         activity=adapter.activity,
                         enability=adapter.enability
 

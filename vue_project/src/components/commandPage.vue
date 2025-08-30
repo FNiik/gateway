@@ -1,16 +1,25 @@
 <script setup>
-import { reactive } from 'vue';
+import { reactive,ref } from 'vue';
+
+import NetAdapterInfoPage from './netAdapterInfoPage.vue';
+import netAdapterInfoResponsePage from './netAdapterInfoResponsePage.vue';
+import arpResponsePage from './arpResponsePage.vue';
+import showRouteResponsePage from './showRouteResponsePage.vue';
+import getDateTimeResponse from './getDateTimeResponse.vue';
+
+const isWaiting = ref(false)
+const clickCounter=ref(0)
 const items= reactive({
-    netAdapterInfo: false,
-    arp: false,
-    showRoute:false,
-    getDateTime:false,
-    setDateTime:false,
-    addRoute:false,
-    removeRoute:false,
-    ping:false,
-    traceRoute:false,
-    tcpPortTest:false
+    NetAdapterInfo: false,
+    Arp: false,
+    ShowRoute:false,
+    GetDateTime:false,
+    SetDateTime:false,
+    AddRoute:false,
+    RemoveRoute:false,
+    Ping:false,
+    TraceRoute:false,
+    TcpPortTest:false
 
 
 })
@@ -24,41 +33,12 @@ function selectItem(selectedItem){
         }
 
     }
+    clickresponse.value=false
 
 
 }
- function callCommand(){
-    if(items.netAdapterInfo){
-        // call netAdapterInfo component
-    }
-    else if(items.arp){
-        // call arp component
-    }
-    else if(items.showRoute){
-        // call showRoute component
-    }
-    else if(items.getDateTime){
-        // call getDateTime component
-    }
-    else if(items.setDateTime){
-        // call setDateTime component
-    }
-    else if(items.addRoute){
-        // call addRoute componet
-    }
-    else if(items.removeRoute){
-        // call removeRoute component
-    }
-    else if(items.ping){
-        // call ping componet
-    }
-    else if(items.traceRoute){
-        // call traceRoute component
-    }
-    else if(items.tcpPortTest){
-        // call tcpPortTest component
-    }
- }
+const clickresponse=ref(false)
+ 
 </script>
 <template>
     <div class="page">
@@ -71,7 +51,7 @@ function selectItem(selectedItem){
 
                 </div>
                 <!-- netAdapterInfo -->
-                <div class="blueItemCard" @click="selectItem('netAdapterInfo')" :class="{ active: items.netAdapterInfo }" >
+                <div class="blueItemCard" @click="selectItem('NetAdapterInfo')" :class="{ active: items.NetAdapterInfo }" >
                     <h4>NetAdapterInfo</h4>
                     
                 
@@ -79,14 +59,14 @@ function selectItem(selectedItem){
 
                 </div>
                 <!-- arp -->
-                <div class="blueItemCard" @click="selectItem('arp')" :class="{ active: items.arp }">
+                <div class="blueItemCard" @click="selectItem('Arp')" :class="{ active: items.Arp }">
                     <h4>Arp</h4>
                     <span>Display Arp table</span>
 
 
                 </div>
                 <!-- showRoute -->
-                <div class="blueItemCard" @click="selectItem('showRoute')" :class="{ active: items.showRoute }">
+                <div class="blueItemCard" @click="selectItem('ShowRoute')" :class="{ active: items.ShowRoute }">
                     <h4>ShowRoute</h4>
                     <span>Show routing table</span>
 
@@ -97,13 +77,13 @@ function selectItem(selectedItem){
                     <span>Time management</span>
                 </div>
                 <!-- getDateTime -->
-                <div class="pinkitemCard" @click="selectItem('getDateTime')" :class="{ active: items.getDateTime }">
+                <div class="pinkitemCard" @click="selectItem('GetDateTime')" :class="{ active: items.GetDateTime }">
                     <h4>GetDateTime</h4>
                     <span>Get current date and time</span>
 
                 </div>
                 <!-- setDateTime -->
-                 <div class="pinkitemCard" @click="selectItem('setDateTime')" :class="{ active: items.setDateTime }">
+                 <div class="pinkitemCard" @click="selectItem('SetDateTime')" :class="{ active: items.SetDateTime }">
                     <h4>SetDateTime</h4>
                     <span>Set system date and time</span>
                  </div>
@@ -116,12 +96,12 @@ function selectItem(selectedItem){
                     <span color="#326452">Routing Management</span>
                 </div>
                 <!-- addRoute -->
-                <div class="greenItemCard" @click="selectItem('addRoute')" :class="{ active: items.addRoute }">
+                <div class="greenItemCard" @click="selectItem('AddRoute')" :class="{ active: items.AddRoute }">
                     <h4>AddRoute</h4>
                     <span>Add a new route</span>
                 </div>
                 <!--removeRoute  -->
-                <div class="greenItemCard" @click="selectItem('removeRoute')" :class="{ active: items.removeRoute }">
+                <div class="greenItemCard" @click="selectItem('RemoveRoute')" :class="{ active: items.RemoveRoute }">
                     <h4>RemoveRoute</h4>
                     <span>Remove an existing route</span>
                 </div>
@@ -132,17 +112,17 @@ function selectItem(selectedItem){
 
                 </div>
                 <!-- ping -->
-                <div class="yelowItemCard" @click="selectItem('ping')" :class="{ active: items.ping }">
+                <div class="yelowItemCard" @click="selectItem('Ping')" :class="{ active: items.Ping }">
                     <h4>Ping</h4>
                     <span>Test connectivity to Ip address</span>
                 </div>
                 <!-- traceRoute -->
-                <div class="yelowItemCard" @click="selectItem('traceRoute')" :class="{ active: items.traceRoute }">
+                <div class="yelowItemCard" @click="selectItem('TraceRoute')" :class="{ active: items.TraceRoute }">
                     <h4>TraceRoute</h4>
                     <span>Trace route to destination</span>
                 </div>
                 <!-- tcpPortTest -->
-                <div class="yelowItemCard" @click="selectItem('tcpPortTest')" :class="{ active: items.tcpPortTest }">
+                <div class="yelowItemCard" @click="selectItem('TcpPortTest')" :class="{ active: items.TcpPortTest }">
                     <h4>TcpPortTest</h4>
                     <span>Test TCP port connectivity </span>
                 </div>
@@ -150,18 +130,81 @@ function selectItem(selectedItem){
         </div>
         <div class="commandExecute">
             <div class="headerCommand">
+                <h4  v-for="key in Object.keys(items).filter(k => items[k])"
+                    :key="key"> {{ key }}</h4>
                 
             </div>
             <div class="commandExecutebody">
                 <!-- callCommand function should be call -->
-                {{ callCommand() }}
+                <NetAdapterInfoPage  v-if="items.NetAdapterInfo"/>
+                <NetAdapterInfoPage  v-if="items.Arp"/>
+                <NetAdapterInfoPage  v-if="items.ShowRoute"/>
+                <NetAdapterInfoPage  v-if="items.GetDateTime"/>
+                
+                
+                <div class="executeButton">
+                    <button @click="clickresponse=true, clickCounter++" :disabled="isWaiting" v-for="key in Object.keys(items).filter(k => items[k])" :key="key" >Execute {{key  }}</button>
+                </div>
+                
+            
             </div>
+            
+            
+        
+
+    
           
         </div>
+        <div class="commandResponse" v-if="clickresponse">
+                <div class="headerCommand">
+                    <h4  v-for="key in Object.keys(items).filter(k => items[k])"
+                        :key="key"> {{ key }} Response</h4>
+                
+                
+                </div>
+                <!-- call responsecommand commponents -->
+                 <net-adapter-info-response-page :execute-counter="clickCounter" @update-wait="(val)=>isWaiting=val" v-if="items.NetAdapterInfo"/>
+                 <arp-response-page :execute-counter="clickCounter" @update-wait="(val)=>isWaiting=val" v-if="items.Arp"   />
+                 <show-route-response-page :execute-counter="clickCounter" @update-wait="(val)=>isWaiting=val" v-if="items.ShowRoute"   />
+                 <get-date-time-response :execute-counter="clickCounter" @update-wait="(val)=>isWaiting=val" v-if="items.GetDateTime"   />   
+            </div>
     </div>
 
 </template>
 <style scoped>
+.commandResponse{
+    margin: 15px;
+    border:1px solid #F3F4F7;
+    border-radius: 8px;
+}
+button{
+    background-color:#579F55 ;
+    height:40px ;
+    width:150px ;
+    color: white;
+    border:none ;
+    border-radius:5px ;
+    cursor: pointer;
+
+}
+button:disabled{
+    background-color:#a0ca9e ;
+    cursor: not-allowed;
+}
+.executeButton{
+    padding: 30px;
+}
+.commandExecute{
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+    border:1px solid #F3F4F7;
+    border-radius: 8px;
+}
+.headerCommand{
+   
+    padding: 10px;
+}
 .page{
     display: flex;
     flex-direction: column;
@@ -277,6 +320,7 @@ function selectItem(selectedItem){
     padding-left: 20px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+    
 }
 .pinkitemCard h4 {
   margin: 0 0 4px 0;

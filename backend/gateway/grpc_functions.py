@@ -1,16 +1,4 @@
 import grpc
-# import gatewayagent_pb2_grpc as pb2_grp
-# import gatewayagent_pb2 as pb2
-# from . import gatewayagent_pb2 as pb2
-# from . import gatewayagent_pb2_grpc as pb2_grpc
-# import gatewayagent_pb2 as pb2
-# import gatewayagent_pb2_grpc as pb2_grp
-# from backend.gateway import gatewayagent_pb2 as pb2
-# from backend.gateway import gatewayagent_pb2_grpc as pb2_grp
-# import gatewayagent_pb2_grpc as pb2_grp
-# import gatewayagent_pb2 as pb2
-# from gateway import gatewayagent_pb2 as pb2
-# from gateway import gatewayagent_pb2_grpc as pb2_grpc
 from . import gatewayagent_pb2 as pb2
 from . import gatewayagent_pb2_grpc as pb2_grp
 

@@ -36,7 +36,7 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    /* position: fixed; */
+    /* position: fixed;  */
     
     border-right: 1px solid #ddd;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

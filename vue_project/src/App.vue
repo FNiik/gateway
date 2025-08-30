@@ -34,7 +34,8 @@ import sidebar from './components/sidebar.vue';
  .layout {
    display: flex;
    min-height: 100vh; 
-   background-color: #F9FAFC; 
+   background-color: #F9FAFC;
+    
  }
  
  .page {
@@ -43,6 +44,7 @@ import sidebar from './components/sidebar.vue';
    flex-direction: column;
    background-color: #F9FAFC; 
    /* padding: 20px; */
+   /* margin-left: 140px; */
  }
  </style>
  
