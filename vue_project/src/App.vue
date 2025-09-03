@@ -46,5 +46,6 @@ import sidebar from './components/sidebar.vue';
    /* padding: 20px; */
    /* margin-left: 140px; */
  }
+
  </style>
  

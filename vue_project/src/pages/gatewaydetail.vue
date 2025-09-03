@@ -92,27 +92,27 @@ watch(()=>route.params.id,
       
                         </el-tab-pane>
                         <!-- Network tab -->
-                        <el-tab-pane>
+                        <!-- <el-tab-pane>
                             <template #label>
                                 <span class="custom-tabs-label">
                                 <el-icon><Edit /></el-icon>
                                 <span>Network</span>
                                 </span>
-                            </template>
+                            </template> -->
                             <!-- component call -->
       
-                        </el-tab-pane>
+                        <!-- </el-tab-pane> -->
                         <!-- time tab -->
-                        <el-tab-pane>
+                        <!-- <el-tab-pane>
                             <template #label>
                                 <span class="custom-tabs-label">
                                 <el-icon><Edit /></el-icon>
                                 <span>Time</span>
                                 </span>
-                            </template>
+                            </template> -->
                             <!-- component call -->
       
-                        </el-tab-pane>
+                        <!-- </el-tab-pane> -->
                         <!-- commands tab -->
                         <el-tab-pane>
                             <template #label>
