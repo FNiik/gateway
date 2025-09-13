@@ -2,6 +2,9 @@
 import { computed, ref } from 'vue';
 import { More } from '@element-plus/icons-vue';
 import deleteGt from './deleteGt.vue';
+import { StretchHorizontal } from 'lucide-vue-next';
+import { Trash2 } from 'lucide-vue-next';
+import { Eye } from 'lucide-vue-next';
 const { gateways, value } = defineProps({
   gateways: Array,
   value: String
@@ -20,15 +23,31 @@ const filteredgateways = computed(() => {
 </script>
 
 <template>
-  <el-table ref="tableRef" row-key="name" :data="filteredgateways" style="width: 100%">
-    <el-table-column prop="name" label="Gateway Name" width="180" >
+  <el-table ref="tableRef" row-key="name" :data="filteredgateways" style="width: 100%" :header-cell-style="{ fontSize: '18px', fontWeight: 'bold', padding: '20px 10px'}" class="rounded-table">
+    <el-table-column prop="name" label="Gateway Name" align="center" header-align="center" >
+      
         <template #default="scope">
+          <div class="iconName">
+            <!-- <span class="iconWrapper">
+              <StretchHorizontal />
+
+            </span> -->
+            
             <router-link
+              
                 class="namelink"
                 :to="{ name: 'gatewaydetail', params: { id: scope.row.id } }"
             >
+            <!-- <div class="iconWrapper">
+              <StretchHorizontal />
+
+            </div> -->
+              
                 {{ scope.row.name }}
             </router-link>
+
+          </div>
+            
             
       
         
@@ -42,8 +61,8 @@ const filteredgateways = computed(() => {
     </el-table-column>    
 
 
-    <el-table-column prop="ipAddress" label="IP Address" width="180" />
-    <el-table-column prop="status" label="Status" width="100">
+    <el-table-column align="center" header-align="center" prop="ipAddress" label="IP Address"  />
+    <el-table-column align="center" header-align="center" prop="status" label="Status" >
       <template #default="scope">
         <el-tag
           :type="scope.row.status && scope.row.status.trim().toLowerCase() === 'active' ? 'success' : 'danger'"
@@ -53,8 +72,8 @@ const filteredgateways = computed(() => {
         </el-tag>
       </template>
     </el-table-column>
-    <el-table-column prop="location" label="Location" :formatter="formatter" />
-    <el-table-column label="Actions">
+    <el-table-column align="center" header-align="center" prop="location" label="Location" :formatter="formatter"  />
+    <el-table-column align="center" header-align="center" label="Actions">
       <template #default="scope">
         <el-dropdown>
       <el-button >
@@ -66,7 +85,7 @@ const filteredgateways = computed(() => {
           <el-dropdown-item  > 
             <template #default={row}>
             <router-link class="dropdownItems" :to="{ name: 'gatewaydetail', params: { id: scope.row.id } }" >
-              View Details
+              <Eye />View Details
             </router-link>
             </template>
           </el-dropdown-item>
@@ -75,7 +94,7 @@ const filteredgateways = computed(() => {
               <delete-gt :id="Number(scope.row.id)" :ref="el => deleteRefs[scope.row.id]=el"/>
               
             <!-- call delete component -->
-             <span class="dropdownItems">Delete</span>
+             <span class="dropdownItems2"><Trash2 />Delete</span>
             </template>
           
           </el-dropdown-item>
@@ -86,19 +105,47 @@ const filteredgateways = computed(() => {
 
     </el-table-column>
   </el-table>
+  
 </template>
 <style scoped>
+.rounded-table {
+  border: 1px solid #E4E7EC; 
+  border-radius: 8px;    
+  overflow: hidden;       
+}
+
+.iconWrapper {
+  
+ display: flex; 
+}
+.iconName{
+  display: flex;
+  justify-content: center; 
+  gap: 8px;
+ 
+  align-items: center; 
+}
+.iconName:hover,
+.iconName:visited:hover
+{
+  color:#5065C0;
+  text-decoration: none;
+
+}
 .namelink{
     font-size: large;
     color: black;
     text-decoration: none;
     text-align: center;
+    display: flex;
+    align-items: center;
+    
     
 }
 .namelink:hover,
 .namelink:visited:hover 
 {
-    text-decoration: underline;
+    text-decoration: none;
     color:#5065C0;
 }
 .namelink:visited{
@@ -110,11 +157,21 @@ const filteredgateways = computed(() => {
   color: black;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
   
 }
-.dropdownItems span{
-  color: red;
+.dropdownItems2{
+  color:red;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  
 }
+
 </style>

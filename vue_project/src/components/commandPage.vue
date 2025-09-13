@@ -19,7 +19,7 @@ import traceRouteParameterPage from './traceRouteParameterPage.vue';
 import traceRouteResponsePage from './traceRouteResponsePage.vue';
 import tcpPortTestParameterPage from './tcpPortTestParameterPage.vue';
 import tcpPortTestResponsePage from './tcpPortTestResponsePage.vue';
-
+import { Play } from 'lucide-vue-next';
 const isWaiting = ref(false)
 const clickCounter=ref(0)
 const items= reactive({
@@ -150,8 +150,7 @@ function tcpPortTestHandler(emittedval){
                     :options="options"
                     placeholder="Select"
                     style="width: 500px"
-                    popper-class="selectStyle"
-                    :popper-style="{  color: 'black' }"
+                    
                     
                 
                 />
@@ -201,7 +200,8 @@ function tcpPortTestHandler(emittedval){
         
         
                     <div class="executeButton">
-                        <button @click="clickresponse=true, clickCounter++" :disabled="isWaiting" v-for="key in Object.keys(items).filter(k => items[k])" :key="key" >Execute {{key  }}</button>
+                        
+                        <button class="buttonicon" @click="clickresponse=true, clickCounter++" :disabled="isWaiting" v-for="key in Object.keys(items).filter(k => items[k])" :key="key" > <Play size="20"/>Execute </button>
                     </div>
         
     
@@ -221,7 +221,7 @@ function tcpPortTestHandler(emittedval){
         <div class="commandResponse" v-if="clickresponse">
                 <div class="headerCommand">
                     <h3  v-for="key in Object.keys(items).filter(k => items[k])"
-                        :key="key"> {{ key }} Response</h3>
+                        :key="key"> {{ key }} Response </h3>
                 
                 
                 </div>
@@ -268,14 +268,7 @@ function tcpPortTestHandler(emittedval){
 
 </template>
 <style scoped>
-.selectStyle{
-    color:black;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
-}
-.selectStyle.el-select-dropdown__item.is-selected{
-    color: black;
 
-}
 .cardDescription{
   height: 15px;  
   display: flex;
@@ -341,6 +334,15 @@ button:disabled{
 }
 .executeButton{
     padding: 30px;
+    
+  
+}
+.buttonicon{
+  align-items: center;
+    display: flex;
+  justify-content: center;
+  gap: 10px;  
+
 }
 .commandExecute{
     display: flex;
@@ -351,14 +353,25 @@ button:disabled{
 }
 .headerCommand{
    
-    padding-left: 25px;
-    padding-top: 3px;
-    padding-bottom: 3px;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
+.headerCommandParameter{
+  /* padding: 15px; */
+  
+}
+.headerCommandParameter h3{
+  /* margin-bottom: 0px; */
+}
+/* .headerCommand h3{
+  margin-bottom: 0px;
+} */
 .page{
     display: flex;
     flex-direction: column;
     /* padding: 20px; */
+    /* margin-left: 0px; */
 }
 .twoCard{
     display: flex;
@@ -512,6 +525,11 @@ button:disabled{
   background-color: #FFF7BF;
 }
 h4{
-    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-bottom: 9px;
+}
+.popper-class{
+  background-color: #555;
+  color:red;
 }
 </style>

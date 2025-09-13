@@ -1,14 +1,14 @@
 <!-- addroute parameter component -->
 <script setup>
 import { ref, defineEmits, watch } from 'vue';
-const destIndex=ref('')
+const destIndex=ref('1')
 const destIp=ref('')
 const destMask=ref('')
 const destGateway=ref('')
 const gatewayIp=ref('')
-const metric=ref('')
+const metric=ref('10')
 const interfaceName=ref('')
-const interfaceIndex=ref('')
+const interfaceIndex=ref('1')
 const emit=defineEmits(['addRouteParameters'])
 
 watch([destIndex,destIp, destMask, destGateway, gatewayIp, metric, interfaceName, interfaceIndex],([newdestIndex,newdestIp, newdestMask, newdestGateway, newgatewayIp, newmetric, newinterfaceName, newinterfaceIndex])=>{
@@ -98,19 +98,27 @@ watch([destIndex,destIp, destMask, destGateway, gatewayIp, metric, interfaceName
     flex-direction: column;
     /* border-top: 1px solid #F3F4F7; */
     border-bottom:1px solid #F3F4F7 ;
-    padding: 20px;
+    padding-bottom: 0px;
+
+    /* padding: 20px; */
 
     
 }
 .twocard {
   display: flex;
   gap: 35px; 
+  /* padding-left: 5px; */
+  padding-right: 15px;
+ margin-bottom: 0px;
   
 }
 
 .inputEdit {
   flex: 1; 
   padding: 15px;
+}
+.inputEdit::placeholder{
+    color: red;
 }
 
 .inputEdit input {
@@ -123,6 +131,7 @@ watch([destIndex,destIp, destMask, destGateway, gatewayIp, metric, interfaceName
   
 }
 h4{
-    margin-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 5px;
 }
 </style>

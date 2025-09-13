@@ -107,6 +107,8 @@ watch([datePicked,  timePicked],([newDate, newTime])=>{
     flex-direction: row;
     /* border-top: 1px solid #F3F4F7; */
     border-bottom:1px solid #F3F4F7 ;
+    padding: 20px;
+    padding-top: 0px;
 
     
 }
@@ -158,5 +160,9 @@ watch([datePicked,  timePicked],([newDate, newTime])=>{
   .demo-date-picker {
     gap: 1.5rem;
   }
+}
+h4{
+    margin-bottom: 5px;
+    margin-top: 0px;
 }
 </style>

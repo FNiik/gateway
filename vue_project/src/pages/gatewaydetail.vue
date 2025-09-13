@@ -8,6 +8,8 @@ import overview from '@/components/overview.vue';
 import Overview from '@/components/overview.vue';
 import edit from '@/components/edit.vue';
 import commandPage from '@/components/commandPage.vue';
+import edit2 from '@/components/edit2.vue';
+import { Terminal } from 'lucide-vue-next';
 const route=useRoute()
 // let id=ref(route.params.id)
 // fetch data
@@ -55,14 +57,14 @@ watch(()=>route.params.id,
 
 <template>
     <div class="page">
-        <div class="headerpage">
+        <!-- <div class="headerpage">
             <h2 >Gateways</h2>
             <span> Gateway Management Console</span> 
            
-        </div>
+        </div> -->
         <div class="tablesearch">
             <h1>{{ gatewayinformation.name }}</h1>
-            <span>{{ gatewayinformation.description }}</span>
+            <!-- <span>{{ gatewayinformation.description }}</span> -->
             <br></br>
             <div class="scrollbarAndComponent">
                 <div class="scrollbar">
@@ -83,11 +85,12 @@ watch(()=>route.params.id,
                         <el-tab-pane>
                             <template #label>
                                 <span class="custom-tabs-label">
-                                <el-icon><Edit /></el-icon>
+                                <el-icon ><Edit  /></el-icon>
                                 <span>Edit</span>
                                 </span>
                             </template>
-                            <edit :gatewayinfo="gatewayinformation" />
+                            <edit :gatewayinfo="gatewayinformation"  />
+                             <!-- <edit2 :gatewayinfo="gatewayinformation" /> -->
                             <!-- component call -->
       
                         </el-tab-pane>
@@ -117,7 +120,9 @@ watch(()=>route.params.id,
                         <el-tab-pane>
                             <template #label>
                                 <span class="custom-tabs-label">
-                                <el-icon><Edit /></el-icon>
+                                <!-- <el-icon><Edit /></el-icon> -->
+                                <Terminal size="17"/>
+
                                 <span>commands</span>
                                 </span>
                             </template>
@@ -173,6 +178,7 @@ watch(()=>route.params.id,
     flex-direction: column;
     flex-grow: 1;
     /* padding: 20px; */
+    
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
 }

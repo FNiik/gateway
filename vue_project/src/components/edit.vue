@@ -16,83 +16,14 @@ let newparameters=reactive({
    description:'',
 
 })
-// for(let i in newparameters){
-//     if(newparameters[i]!==''){
-//         changedParameters.value.push(i)
-//     }
-// }
+
 watch(newparameters, (val) => {
   changedParameters.value = Object.entries(val)
-    .filter(([_, v]) => v !== '')
+    .filter(([_, v]) => v !== '' )
     .map(([k, v]) => ({ field: k, value: v }))
 }, { deep: true })
 
-// function updateData(){
-//     if(changedParameters.value.length===0){
-//         console.log('error. no data to fetch')
-//     }
-//     else{
-//         let fields = changedParameters.value.map(item => {
-//             const isNumber = typeof item.value === 'number';
-//             return isNumber 
-//                 ? `${item.field}: ${item.value}` 
-//                 : `${item.field}: "${item.value}"`;
-//         })
-//   .join(' ');
-//         let query=
-//         `mutation{
-//             updateGateway(
-//                 id:${gatewayinformation.gatewayinfo.id}
-//                 ${fields}
-//             )  {
-//                 gateway{
-//                     name
-//                     ipAddress
-//                     portNumber
-//                     id
-//                     status
-//                     location
-//                     description
-//                     }
-//                 ok
-//                 message
-//                 }
-//         }`
-//         fetch('http://127.0.0.1:8000/gateway/graphql/',{
-//             method: 'post',
-//             headers: 
-//             {'content-type': 'application/json'},
-//             body: JSON.stringify({query: query})
 
-//         })
-//        .then(function(response){
-//             return response.json();
-//         })
-//         .then(function(data){
-//             if (!data.data.gateway) {
-//                 throw new Error("Gateway not found");
-//             }
-//             else{
-
-//             }
-//         })
-//         newparameters={
-//             name:'',
-//             ipAddress:'',
-//             portNumber:'',
-//             status:'',
-//             location:'',
-//             description:'',
-
-//         }      
-            
-
-
-            
-    
-
-//     }
-// }    
 function updateData() {
   if (!changedParameters.value || changedParameters.value.length === 0) {
     console.log('Error: no data to update');
@@ -156,11 +87,11 @@ function updateData() {
 }
 
 const disable= computed(()=>{
-    if(changedParameters.value.length===0){
-        return true
+    if(changedParameters.value.length!==0 && (isValidIP(newparameters.ipAddress)|| newparameters.ipAddress==='')){
+        return false
     }
     else{
-        return false
+        return true
     }
 })
 const options = [
@@ -173,7 +104,11 @@ const options = [
     label: 'Inactive',
   },
 ]
-
+function isValidIP(ip) {
+  
+  const regex = /^(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)){3}$/;
+  return regex.test(ip.trim());
+}
 
 </script>
 
@@ -188,7 +123,13 @@ const options = [
         </div>
         <div class="inputEdit">
             <h4>IP Address </h4>
-            <input v-model="newparameters.ipAddress" :placeholder="gatewayinfo.ipAddress" ></input>
+            <!-- <input v-if="isValidIP(newparameters.ipAddress)||newparameters.ipAddress===''" v-model="newparameters.ipAddress" :placeholder="gatewayinfo.ipAddress" ></input>
+            <input v-else v-model="newparameters.ipAddress" :placeholder="gatewayinfo.ipAddress" style="border-color: red;"></input> -->
+            <input 
+              v-model="newparameters.ipAddress" 
+              :placeholder="gatewayinfo.ipAddress"
+              :style="{ borderColor: newparameters.ipAddress && !isValidIP(newparameters.ipAddress) ? 'red' : '#E3E3E3' }"
+            />
 
 
         </div>
@@ -255,24 +196,29 @@ const options = [
 .twocard {
   display: flex;
   gap: 35px; 
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .inputEdit {
   flex: 1; 
+  
 }
 
 .inputEdit input {
   width: 100%; 
-  height: 40px;
+  height: 30px;
   border:1px solid #E3E3E3;
   border-radius: 5px;
+  padding: 5px;
   
 }
 .inputEdit textarea {
   width: 100%; 
-  height: 60px;
+  height: 80px;
   border:1px solid #F2F3F7;
   border-radius: 5px;
+  padding: 5px;
   
 }
 .buttoms{
@@ -293,6 +239,6 @@ button:disabled{
     cursor: not-allowed;
 }
 h4{
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 </style>

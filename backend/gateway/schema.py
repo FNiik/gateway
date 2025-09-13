@@ -154,6 +154,7 @@ class Query(graphene.ObjectType):
                 route_info=route_info_list
 
             )   
+    
     def resolve_arp(self, info):
         resive=grpc_functions.arp()
         if resive:
@@ -161,8 +162,13 @@ class Query(graphene.ObjectType):
                 response=resive.response
             )
 
-                                                
-                
+    def resolve_get_date_time(self, info):
+        response=grpc_functions.get_date_time()
+        if response:
+            return GetDateTimeType(
+                current_date=response.current_date,
+                current_time= response.current_time
+            )
 
                 
 
@@ -174,13 +180,6 @@ class Query(graphene.ObjectType):
 #     else:
 #         return "Failed to update date and time"
 
-# def resolve_get_date_time(self, info):
-#     response=grpc_functions.get_date_time()
-#     if response:
-#         return GetDateTimeType(
-#             current_date=response.current_date,
-#             current_time= response.cuurent_time
-#         )
     
     
 

@@ -29,6 +29,7 @@ watch([targetIp],([newIp])=>{
   display: flex;
   gap: 35px; 
   padding: 20px;
+  padding-top: 0px;
 }
 
 .inputEdit {
@@ -46,6 +47,7 @@ watch([targetIp],([newIp])=>{
   
 }
 h4{
-    margin-bottom: 0px;
+    margin-bottom: 5px;
+    margin-top: 0px;
 }
 </style>
