@@ -1,8 +1,14 @@
+<!-- delete component -->
 <script setup>
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { onMounted } from 'vue';
+import { onMounted ,defineEmits, ref, watch} from 'vue';
 const { id } = defineProps({ id: Number })
 
+// const counter=ref(0)
+// watch(counter, (newVal) => {
+//   emit('updatelist', newVal)
+// })
+const emit = defineEmits(['updatelist'])
 function deleteGateway(){
 let query=`mutation{
   deleteGateway(id:${id}){
@@ -29,6 +35,7 @@ fetch('http://127.0.0.1:8000/gateway/graphql/',{
   }
     if(data.data.deleteGateway.ok){
         alert("Gateway deleted successfully")
+        emit('updatelist')
         
     }
     else{
@@ -68,6 +75,7 @@ const open = () => {
 defineExpose({ open })
 </script>
 <template>
+  <div style="display: none"></div>
 
 </template>
 <style scoped>

@@ -23,7 +23,7 @@ const options = [
   { value: 'inactive', label: 'Inactive' },
   { value:'', label:"All Status" }
 ]
-
+const toUpdateList=ref(0)
 let gateways = ref([])
 
 function loadGateways(page = page1.value, pagesize = pageSize1.value){
@@ -73,6 +73,9 @@ onMounted(() => {
 watch(loadPerPage, (newval)=>{
   loadGateways(page1,newval)
 })
+watch(toUpdateList, (newval)=>{
+  loadGateways(page1,loadPerPage)
+})
 </script>
 
 <template>
@@ -107,11 +110,11 @@ watch(loadPerPage, (newval)=>{
             :value="item.value"
           />
         </el-select> 
-        <create />
+        <create  @updatelist="(val)=>toUpdateList=val"/>
       </div>
 
       <div class="headerbody">
-        <tablecomponent :gateways="gateways" :value="value" />
+        <tablecomponent :gateways="gateways" :value="value" @updatelistDelete="loadGateways(page1, loadPerPage)" />
         <span class="pageInfo">Page {{ page1 }} of {{ Math.max(1, Math.ceil(totalCount1 / pageSize1)) }}</span>
 
         <div class="pagination">

@@ -128,7 +128,8 @@ function isValidIP(ip) {
             <input 
               v-model="newparameters.ipAddress" 
               :placeholder="gatewayinfo.ipAddress"
-              :style="{ borderColor: newparameters.ipAddress && !isValidIP(newparameters.ipAddress) ? 'red' : '#E3E3E3' }"
+              
+              :class="{ 'invalid-input': newparameters.ipAddress && !isValidIP(newparameters.ipAddress) }"
             />
 
 
@@ -192,7 +193,21 @@ function isValidIP(ip) {
 </template>
 
 <style scoped>
+input {
+  border: 1px solid #E3E3E3;
+  padding: 5px;
+  border-radius: 5px;
+  outline: none;
+}
 
+input:focus {
+  border-color: inherit;
+  box-shadow: none;
+}
+
+.invalid-input {
+  border-color: red !important;
+}
 .twocard {
   display: flex;
   gap: 35px; 

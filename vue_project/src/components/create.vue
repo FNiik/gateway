@@ -1,5 +1,6 @@
+<!-- create component -->
 <script setup>
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, defineEmits } from 'vue';
 const gateway_name=ref('')
 const gateway_ip=ref('')
 const gateway_status=ref('active')
@@ -9,6 +10,11 @@ const gateway_description=ref('')
 import { Plus } from 'lucide-vue-next';
 // const dialogFormVisible=ref(true)
 // 
+const emit=defineEmits(['updatelist'])
+const counter=ref(0)
+watch(counter, (newVal) => {
+  emit('updatelist', newVal)
+})
 const dialogFormVisible = ref(false)
 const formLabelWidth = '140px'
 const options = [
@@ -71,7 +77,7 @@ function createGateway(){
 }
 
     `;
-    fetch('http://127.0.0.1:8000/gateway/graphql/',{
+    fetch("http://127.0.0.1:8000/gateway/graphql/",{
     method: 'post',
     headers: 
         {'content-type': 'application/json'},
@@ -88,6 +94,7 @@ function createGateway(){
   }
     if(data.data.createGateway.ok){
         alert("Gateway created successfully")
+        counter.value++
         dialogFormVisible.value=false
         gateway_name.value=''
         gateway_ip.value=''
@@ -110,7 +117,10 @@ function isValidIP(ip) {
   const regex = /^(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)){3}$/;
   return regex.test(ip.trim());
 }
-
+const borderColor = computed(() => {
+  if (!gateway_ip.value) return "#E3E3E3";
+  return isValidIP(gateway_ip.value) ? "#E3E3E3" : "red";
+});
 </script>
 <template>
      <div class="forButtom">
@@ -132,7 +142,7 @@ function isValidIP(ip) {
                     <input 
                       v-model="gateway_ip" 
                       :placeholder="'192.168.1.1'"
-                      :style="{ borderColor:gateway_ip  && !isValidIP(gateway_ip) ? 'red' : '#E3E3E3' }"
+                      :class="{ 'invalid-input': gateway_ip && !isValidIP(gateway_ip) }"
                     />
                   </div>
                   <div class="twocard">
@@ -205,6 +215,21 @@ function isValidIP(ip) {
 :deep(.el-dialog__header .el-dialog__title) {
   font-size: 20px;   
   font-weight: 700;  
+}
+input {
+  border: 1px solid #E3E3E3;
+  padding: 5px;
+  border-radius: 5px;
+  outline: none;
+}
+
+input:focus {
+  border-color: inherit;
+  box-shadow: none;
+}
+
+.invalid-input {
+  border-color: red !important;
 }
 .buttons{
     display: flex;

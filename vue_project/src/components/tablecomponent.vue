@@ -1,5 +1,6 @@
+<!-- table component -->
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref , defineEmits} from 'vue';
 import { More } from '@element-plus/icons-vue';
 import deleteGt from './deleteGt.vue';
 import { StretchHorizontal } from 'lucide-vue-next';
@@ -11,6 +12,7 @@ const { gateways, value } = defineProps({
 })
 const deleteRefs={}
 const tableRef = ref()
+const toUpdateList=ref(0)
 
 const formatter = (row, column) => {
   return row.location
@@ -20,6 +22,10 @@ const filteredgateways = computed(() => {
   if (!value) return gateways
   return gateways.filter(gt => gt.status && gt.status.toLowerCase() === value.toLowerCase())
 })
+const emit = defineEmits(['updatelistDelete'])
+function handleUpdateList() {
+  emit('updatelistDelete') 
+}
 </script>
 
 <template>
@@ -90,12 +96,15 @@ const filteredgateways = computed(() => {
             </template>
           </el-dropdown-item>
           <el-dropdown-item @click="()=>deleteRefs[scope.row.id].open()"> 
-            <template #default={row}>
-              <delete-gt :id="Number(scope.row.id)" :ref="el => deleteRefs[scope.row.id]=el"/>
+            <!-- <template #default={row}> -->
+              <delete-gt   @updatelist="handleUpdateList" :id="Number(scope.row.id)" :ref="el => deleteRefs[scope.row.id]=el"  />
+                
+                
+              
               
             <!-- call delete component -->
              <span class="dropdownItems2"><Trash2 />Delete</span>
-            </template>
+            <!-- </template> -->
           
           </el-dropdown-item>
         </el-dropdown-menu>

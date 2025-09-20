@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -77,15 +77,24 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'django2',        #databse name
+    #     'USER': 'django_user2',        
+    #     'PASSWORD': '123',  
+    #     'HOST': 'localhost',           
+    #     'PORT': '5432',
+    #     'CONN_MAX_AGE': 600, 
+       
+    # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'django2',        #databse name
-        'USER': 'django_user2',        
-        'PASSWORD': '123',  
-        'HOST': 'localhost',           
-        'PORT': '5432',
-        'CONN_MAX_AGE': 600, 
-       
+        'NAME': os.getenv('DB_NAME', 'django2'),
+        'USER': os.getenv('DB_USER', 'django_user2'),
+        'PASSWORD': os.getenv('DB_PASSWORD', '123'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '5432'),
+        'CONN_MAX_AGE': 600,
     }
 }
 

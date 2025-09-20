@@ -8,7 +8,7 @@ import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import './style/custom-theme.css'
 
-import 'primeicons/primeicons.css'
+// import 'primeicons/primeicons.css'
 
 
 const app =createApp(App)
